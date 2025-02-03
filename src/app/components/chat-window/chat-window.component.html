@@ -1,0 +1,35 @@
+<div class="chat-container" #chatContainer>
+    <div *ngFor="let message of chatService.messages$ | async" class="message">
+      <app-message [message]="message"></app-message>
+    </div>
+    
+    <div *ngIf="isSending" class="typing-indicator">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  
+  <div class="input-container">
+    <!-- <button class="theme-toggle" (click)="themeService.toggleTheme()">
+      {{ themeService.getCurrentTheme() === 'light' ? '🌙' : '☀️' }}
+    </button> -->
+    
+    <textarea
+      [(ngModel)]="newMessage"
+      (keydown.enter)="sendMessage()"
+      placeholder="Type your message..."
+    ></textarea>
+    
+    <button class="send-button" (click)="sendMessage()" [disabled]="isSending">
+      {{ isSending ? 'Sending...' : 'Send' }}
+    </button>
+    
+    <button class="action-button" (click)="scrollToBottom()">⬇️</button>
+    <button class="action-button" (click)="clearChat()">🧹</button>
+    
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+      <button class="retry-button" (click)="regenerateResponse()">Retry</button>
+    </div>
+  </div>

@@ -1,0 +1,117 @@
+.chat-container {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  padding-bottom: var(--input-container-height);
+}
+
+.input-container {
+  position: fixed;
+  bottom: var(--header-footer-height);
+  left: 0;
+  right: 0;
+  background-color: var(--background-color);
+  padding: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  border-top: 1px solid var(--border-color);
+  z-index: 50;
+}
+
+textarea {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  resize: none;
+  min-height: 55px;
+  max-height: 120px;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+button {
+  padding: 1.25rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.send-button {
+  background-color: #e0e0e0;
+  color: #111;
+}
+
+.action-button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.theme-toggle {
+  background-color: none;
+  color: white;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.typing-indicator {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px 16px;
+  margin: 8px;
+}
+
+/* Error Message */
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.retry-button {
+  background-color: #d32f2f;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+}
+
+/* Theme Toggle Fix */
+button {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .input-container {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+  
+  textarea {
+    padding: 0.5rem;
+  }
+  
+  button {
+    padding: 1.25rem;
+  }
+}
