@@ -1,6 +1,10 @@
 :root {
   --header-footer-height: 60px;
   --input-container-height: 120px;
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #e0e0e0;
+  --primary-color: #ffffff;
 }
 
 /* Common styles */
