@@ -24,3 +24,45 @@ body {
 body, .app-header, .app-footer, .message-bubble, textarea, button {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+.message-content {
+  line-height: 1.6;
+}
+
+.message-content h1,
+.message-content h2,
+.message-content h3 {
+  margin: 1em 0 0.5em 0;
+  line-height: 1.2;
+}
+
+.message-content p {
+  margin: 0.5em 0;
+}
+
+.message-content ul,
+.message-content ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.message-content code {
+  background-color: rgba(0,0,0,0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.message-content pre {
+  background-color: rgba(0,0,0,0.05);
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.message-content blockquote {
+  border-left: 3px solid rgba(0,0,0,0.1);
+  margin: 1em 0;
+  padding-left: 1em;
+  color: #666;
+}

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Message } from '../../models/message/message.model';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-message',
@@ -10,4 +11,10 @@ import { CommonModule } from '@angular/common';
 })
 export class MessageComponent {
   @Input() message!: Message;
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  get safeContent(): SafeHtml {
+    return this.message.safeContent || this.sanitizer.bypassSecurityTrustHtml(this.message.content);
+  }
 }

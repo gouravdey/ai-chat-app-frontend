@@ -1,35 +1,48 @@
-<div class="chat-container" #chatContainer>
-    <div *ngFor="let message of chatService.messages$ | async" class="message">
-      <app-message [message]="message"></app-message>
-    </div>
-    
-    <div *ngIf="isSending" class="typing-indicator">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>
-  </div>
-  
-  <div class="input-container">
-    <!-- <button class="theme-toggle" (click)="themeService.toggleTheme()">
-      {{ themeService.getCurrentTheme() === 'light' ? '🌙' : '☀️' }}
-    </button> -->
-    
-    <textarea
-      [(ngModel)]="newMessage"
-      (keydown.enter)="sendMessage()"
-      placeholder="Type your message..."
-    ></textarea>
-    
-    <button class="send-button" (click)="sendMessage()" [disabled]="isSending">
-      {{ isSending ? 'Sending...' : 'Send' }}
+<div class="input-container">
+  <div class="mode-toggle">
+    <button 
+      (click)="toggleImageMode()"
+      [class.active]="isImageMode"
+      title="Toggle Image Generation Mode"
+    >
+      {{ isImageMode ? '🖼️' : '💬' }}
     </button>
-    
-    <!-- <button class="action-button" (click)="scrollToBottom()">⬇️</button> -->
-    <button class="action-button" (click)="clearChat()">🧹</button>
-    
-    <div *ngIf="error" class="error-message">
-      {{ error }}
-      <button class="retry-button" (click)="regenerateResponse()">Retry</button>
-    </div>
   </div>
+
+  <textarea 
+    [(ngModel)]="newMessage" 
+    placeholder="Type your message..."
+    (keydown.enter)="onTextareaKeydown($event)"
+  ></textarea>
+  
+  <button (click)="sendMessage()" [disabled]="isSending">
+    {{ isSending ? 'Sending...' : 'Send' }}
+  </button>
+
+  <button class="action-button" (click)="clearChat()">🧹</button>
+</div>
+
+<div class="chat-container" #chatContainer>
+  <div class="mode-indicator" [class.image-mode]="isImageMode">
+    {{ isImageMode ? 'Image Mode' : 'Chat Mode' }}
+  </div>
+  <ng-container *ngFor="let message of chatService.combinedMessages$ | async">
+    <ng-container [ngSwitch]="message.role">
+      <!-- Existing message types -->
+      <app-message *ngSwitchCase="'user'" [message]="message"></app-message>
+      <app-message *ngSwitchCase="'assistant'" [message]="message"></app-message>
+
+      <!-- Image message -->
+      <div *ngSwitchCase="'image'" class="image-message">
+        <div class="image-prompt">
+          {{ message.content }}
+          <span *ngIf="message.isProcessing" class="processing-indicator">⏳ Generating...</span>
+        </div>
+        <img *ngIf="message.imageUrl" [src]="message.imageUrl" alt="Generated image">
+        <div *ngIf="message.error" class="error-message">
+          {{ message.error }}
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

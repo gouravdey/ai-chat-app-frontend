@@ -1,14 +1,7 @@
 <!-- src/app/components/message/message.component.html -->
 <div [class]="'message-bubble ' + message.role">
-    <div class="message-content">
-      <span *ngIf="message.isTyping" class="typing-animation">
-        {{ message.content }}
-      </span>
-      <span *ngIf="!message.isTyping">
-        {{ message.content }}
-      </span>
-    </div>
-    <div class="message-timestamp" *ngIf="message.timestamp">
-      {{ message.timestamp | date:'shortTime' }}
-    </div>
+  <div class="message-content" [innerHTML]="safeContent"></div>
+  <div class="message-timestamp" *ngIf="message.timestamp">
+    {{ message.timestamp | date:'shortTime' }}
   </div>
+</div>

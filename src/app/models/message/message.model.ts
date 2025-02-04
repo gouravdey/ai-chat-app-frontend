@@ -1,6 +1,10 @@
 export interface Message {
-    role: 'system' | 'user' | 'assistant';
+    role: 'system' | 'user' | 'assistant' | 'image';
     content: string;
-    timestamp?: Date;
     isTyping?: boolean;
+    timestamp?: number;
+    safeContent?: string;
+    imageUrl?: string;
+    isProcessing?: boolean;
+    error?: string
 }
