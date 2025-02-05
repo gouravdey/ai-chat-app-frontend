@@ -157,9 +157,8 @@ button:hover {
 
 .mode-indicator {
   position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 10px;
+  left: 70%;
   padding: 8px 16px;
   border-radius: 20px;
   background-color: #e3f2fd;
@@ -177,7 +176,7 @@ button:hover {
 
 .mode-indicator:hover {
   opacity: 1;
-  transform: translate(-50%, -2px);
+  transform: translate(0, -2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
